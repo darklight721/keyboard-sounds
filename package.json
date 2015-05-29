@@ -1,7 +1,7 @@
 {
   "name": "keyboard-sounds",
   "main": "index.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Makes (mechanical) keyboard noise while you type.",
   "keywords": [
     "mechanical",
