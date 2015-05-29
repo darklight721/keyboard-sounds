@@ -1,0 +1,18 @@
+{
+  "name": "mechanical-keyboard-sounds",
+  "main": "index.js",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+    "mechanical",
+    "keyboard",
+    "sound"
+  ],
+  "repository": "https://github.com/darklight721/mechanical-keyboard-sounds",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
