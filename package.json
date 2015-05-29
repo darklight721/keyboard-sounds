@@ -1,18 +1,19 @@
 {
-  "name": "mechanical-keyboard-sounds",
+  "name": "keyboard-sounds",
   "main": "index.js",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "Makes (mechanical) keyboard noise while you type.",
   "keywords": [
     "mechanical",
     "keyboard",
     "sound"
   ],
-  "repository": "https://github.com/darklight721/mechanical-keyboard-sounds",
+  "repository": "https://github.com/darklight721/keyboard-sounds",
   "license": "MIT",
   "engines": {
     "atom": ">=0.174.0 <2.0.0"
   },
   "dependencies": {
+    "memoizee": "^0.3.8"
   }
 }

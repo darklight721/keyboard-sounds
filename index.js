@@ -1,51 +1,51 @@
 'use babel';
 
-import { CompositeDisposable, Disposable } from 'atom';
+import { CompositeDisposable } from 'atom';
+import memoize from 'memoizee';
 import path from 'path';
 
 const KEYS = {
   DELETE: 8,
+  ENTER: 13,
   SPACE: 32
 };
 
-function playAudio(name) {
-  let audio = new Audio(path.join(__dirname, 'audio', name));
-  audio.play();
-}
-
-function handleKeyDown(event) {
+let getAudio = memoize(function(keyCode) {
   let name;
 
-  switch (event.keyCode) {
-    case KEYS.DELETE: name = 'delete_press.mp3'; break;
+  switch (keyCode) {
+    case KEYS.ENTER :
     case KEYS.SPACE : name = 'spacebar_press.mp3'; break;
+    case KEYS.DELETE: name = 'delete_press.mp3'; break;
     default         : name = 'key_press.mp3'; break;
   }
 
-  playAudio(name);
-}
+  return new Audio(path.join(__dirname, 'audio', name));
+}, { primitive: true });
 
 export default {
   subscriptions: null,
 
   activate() {
-    this.subscriptions = new CompositeDisposable();
-    this.subscriptions.add(
-      atom.workspace.observeTextEditors(this.attachListeners.bind(this))
-    );
+    let disposables = atom.workspace.observeTextEditors(editor => {
+      let view = atom.views.getView(editor);
+      view.addEventListener('keydown', this.handleKeyDown);
+    });
+
+    this.subscriptions = new CompositeDisposable(disposables);
   },
 
   deactivate() {
+    atom.workspace.getTextEditors().forEach(editor => {
+      let view = atom.views.getView(editor);
+      view.removeEventListener('keydown', this.handleKeyDown);
+    });
+
     this.subscriptions.dispose();
   },
 
-  attachListeners(editor) {
-    let view = atom.views.getView(editor);
-
-    view.addEventListener('keydown', handleKeyDown);
-
-    this.subscriptions.add(new Disposable(function() {
-      view.removeEventListener('keydown', handleKeyDown);
-    }));
+  handleKeyDown(e) {
+    let audio = getAudio(e.keyCode);
+    audio.play();
   }
 };
