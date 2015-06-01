@@ -1,6 +1,6 @@
 {
   "name": "keyboard-sounds",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "version": "0.1.1",
   "description": "Makes (mechanical) keyboard noise while you type.",
   "keywords": [
