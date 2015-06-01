@@ -1,2 +1,4 @@
 'atom-workspace':
-  'ctrl-alt-k': 'keyboard-sounds:toggle'
+  'cmd-shift-k': 'keyboard-sounds:toggle'
+  'cmd-shift-k up': 'keyboard-sounds:volume-up'
+  'cmd-shift-k down': 'keyboard-sounds:volume-down'
